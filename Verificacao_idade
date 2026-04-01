@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main(){
+
+int dateofbirth; //data de nascimento
+int currentyear; //ano atual
+int datecalculation; // variavel para armazenar o calculo da idade 
+char name[50];
+printf("Verifiação de idade \n\n");
+printf("Digite a Primeira parte do seu nome");
+
+printf("Nome: ");
+scanf("%s", &name);
+
+
+printf("Digite o ano de nascimento:");
+scanf(" %d", &dateofbirth);
+
+printf("Digite ano atual:");
+scanf("%d", &currentyear);
+
+datecalculation = currentyear - dateofbirth;
+
+if (datecalculation >= 18) {
+    printf(" %s Você é Maior de idade ! Tem: %d\n", name, datecalculation);
+} else {
+    printf(" %s Você é Menor de idade ! Tem: %d\n", name, datecalculation);
+}
+
+return 0;
+}
