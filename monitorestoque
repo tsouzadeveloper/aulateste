@@ -33,6 +33,12 @@ int main(){
     } else {
         printf("Estoque em nivel minimo \n");
     }
+    printf("infomrações coletadas:\n");
 
+    printf("Temperatura: %.2f", temperatura);
+    printf("Umidade %.2f");
+    printf("Estoque: %u");
+
+    printf("fim"); 
   
 }
