@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int main() {
+
+ /*
+Verificação de nota
+
+O programa verifica se a nota de um aluno é maior
+ ou igual a 6.0 e exibe uma mensagem indicando que o aluno passou. 
+Caso contrário, exibirá uma mensagem indicando que o aluno não passou.*/
+
+  char nomealuno[50];
+  float nota1, nota2, nota3, nota4; 
+  float media;
+  //aprimorando o exemplo, agora recebe scanf e nome do Aluno
+  printf("Nome do Aluno:");
+  scanf("%s",&nomealuno);  
+
+  printf("Digite as notas dos 4 bimestre\n");
+  printf("nota 1: ");
+  scanf("%f",&nota1);
+  printf("nota 2: ");
+  scanf("%f",&nota2);
+  printf("nota 3: ");
+  scanf("%f",&nota3);
+  printf("nota 4: ");
+  scanf("%f",&nota4);
+
+  media = (nota1 + nota2 + nota3 + nota4) / 4;
+  printf("Nota Final:%.2f\n",media);
+
+  if (media >= 6) {
+    printf("%s você passou!\n", nomealuno);
+  } else {
+    printf("%s você está em recuperação.\n", nomealuno);
+  }
+
+  return 0;
+  }
