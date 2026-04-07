@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+    int resultado1 = 0, resultado2 = 0;
+    char primeiroAtributo, segundoAtributo;
+    int atq1, atq2, def1, def2, rec1, rec2;
+
+    // Gerar números aleatórios (ativado para testar o jogo de verdade)
+    srand(time(NULL));
+    atq1 = rand() % 100 + 1; atq2 = rand() % 100 + 1;
+    def1 = rand() % 100 + 1; def2 = rand() % 100 + 1;
+    rec1 = rand() % 100 + 1; rec2 = rand() % 100 + 1;
+
+    printf("--- JOGO DE ATRIBUTOS ---\n");
+    printf("Escolha o primeiro (A: Ataque, D: Defesa, R: Recuo): ");
+    scanf(" %c", &primeiroAtributo);
+
+    // Bloco 1: Primeiro Atributo
+    switch (primeiroAtributo){
+        case 'A': case 'a':
+            printf("Ataque: %d vs %d\n", atq1, atq2);
+            resultado1 = (atq1 > atq2); break;
+        case 'D': case 'd':
+            printf("Defesa: %d vs %d\n", def1, def2);
+            resultado1 = (def1 > def2); break;
+        case 'R': case 'r':
+            printf("Recuo: %d vs %d\n", rec1, rec2);
+            resultado1 = (rec1 > rec2); break;
+        default: printf("Opção Inválida!\n"); return 0;
+    }
+
+    printf("Escolha o segundo atributo: ");
+    scanf(" %c", &segundoAtributo);
+
+    if (primeiroAtributo == segundoAtributo){
+        printf("Erro: Você não pode escolher o mesmo tributo duas vezes!\n");
+    } else {
+        // Bloco 2: Segundo Atributo (Mantendo lógica J1 > J2)
+        switch (segundoAtributo){
+            case 'A': case 'a':
+                printf("Ataque: %d vs %d\n", atq1, atq2);
+                resultado2 = (atq1 > atq2); break;
+            case 'D': case 'd':
+                printf("Defesa: %d vs %d\n", def1, def2);
+                resultado2 = (def1 > def2); break;
+            case 'R': case 'r':
+                printf("Recuo: %d vs %d\n", rec1, rec2);
+                resultado2 = (rec1 > rec2); break;
+            default: printf("Opção Inválida!\n"); return 0;
+        }
+
+        // Lógica de Resultado Final
+        printf("\n--- RESULTADO FINAL ---\n");
+        if (resultado1 && resultado2){
+            printf("VENCEU! Você ganhou em ambos os atributos.\n");
+        } else if (resultado1 || resultado2){
+            printf("EMPATOU! Você ganhou em apenas um.\n");
+        } else {
+            printf("PERDEU! O oponente foi melhor nos dois.\n");
+        }
+    }
+    return 0;
+}
