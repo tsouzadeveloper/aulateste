@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main(){
+
+    int i = 0, numeros;
+//--- exemplos prático - while ----------------
+    while (i <= 10) {
+        
+        if(i % 2 != 0){
+
+            printf("o Numero %d é impar!\n", i);
+  
+        } i++;
+    }
+//--- exemplos prático - d0-while ----------------
+    do{   
+        printf("\n\n Digite um numero PAR para sair do programa...");
+        scanf(" %d", &numeros);
+
+        if (numeros % 2 == 0){
+
+            printf(" %d é par!", numeros);
+        } else {
+            printf(" %d é impar!", numeros );
+        }
+        
+    
+    } while (numeros % 2 != 0);
+
+    printf("Você digitou um numero par, saindo do programa...\n");
+    
+//--- exemplos prático - For ----------------
+
+    int numero, x;
+    
+    printf("\nDigite um numero para calcular a tabuada:");
+    scanf("%d", &numero); 
+
+
+    for (int x = 0; x <= 10; x++)
+    {
+        printf("%d x %d = %d\n", x, numero, x * numero);
+    }
+    
+
+    return 0;
+}
