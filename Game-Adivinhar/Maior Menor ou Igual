@@ -1,66 +1,92 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 
-int main(){
-
-    int numeroJogador, numeroComputador, resultado = 0;
-    char tipoComparacao;
-
-    //Gerar numero aleatório
-    srand(time(0));
-    numeroComputador = rand() % 100 + 1; //numero entre 1 e 100
-
-    //inicio do game
-    printf("BEM VINDO AO JOGO DE ADIVINHAÇÃO\n");
-    printf("    MAIOR - MENOR OU IGUAL\n");
-    printf("Você deve escolher um número e o tipo de comparação. \n");
-    printf("M. Maior\n");
-    printf("N. Menor\n");
-    printf("I. Igual\n");
-
-    printf("Escolha a Comparação:  ");
-    scanf(" %c", &tipoComparacao);
-    
-    printf("Digite seu numero - entre  1 0 100: ");
-    scanf("%d", &numeroJogador);
-// exibe o número do computador
-    printf("O numero de compuadores é: %d\n",numeroComputador);
-
-switch (tipoComparacao){
-
-case 'M':
-case 'm':
-    printf("Você escolheu a opçao maior !\n");
-    resultado = numeroJogador > numeroComputador ? 1 : 0;
-    break;
-
-case 'N': 
-case 'n': 
-    printf("Você escolheu a opçao menor !\n");
-    resultado = numeroJogador < numeroComputador ? 1 : 0;
-    break;
-
-
-case 'I':
-case 'i':
-    printf("você escolheu a opção igual\n");
-    resultado = numeroJogador == numeroComputador ? 1 : 0;
-    break;
-
-
-default:
-    printf("Opção de jogo inválida \n");
-    break;
+// Função para limpar a tela em Windows ou Linux
+void limparTela() {
+    /*#ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif*/
 }
 
-printf("O numero de compuadores: %d e o do jogador: %d\n",numeroComputador, numeroJogador);
-
-if (resultado == 1){
-    printf("Parabens Você venceu\n");
-} else {
-    printf("Infelizmente, você perdeu \n");
+// Função para desenhar uma linha divisória
+void divisor() {
+    printf("==========================================\n");
 }
 
+int main() {
+    int numeroJogador, numeroComputador, resultado;
+    int vitorias = 0, partidas = 0;
+    char tipo, continuar;
 
+    srand(time(NULL));
+
+    do {
+        limparTela();
+        divisor();
+        printf("       JOGO DE ADIVINHACAO V1.0\n");
+        divisor();
+        printf(" Placar Atual: [ %d Vitorias em %d Partidas ]\n", vitorias, partidas);
+        divisor();
+
+        printf("\nComo voce quer comparar seu numero?\n");
+        printf(" [M] Maior  |  [N] Menor  |  [I] Igual\n");
+        printf(" Escolha: ");
+        scanf(" %c", &tipo);
+        tipo = toupper(tipo);
+
+        printf(" Digite seu numero (1-100): ");
+        if (scanf("%d", &numeroJogador) != 1) { // Validação simples de entrada
+            printf(" Erro: Digite apenas numeros!\n");
+            while(getchar() != '\n'); // Limpa buffer
+            continue;
+        }
+
+        numeroComputador = (rand() % 100) + 1;
+        partidas++;
+
+        printf("\n Analisando resultados...\n");
+        divisor();
+        printf(" O Computador escolheu: %d\n", numeroComputador);
+        printf(" Voce escolheu:       %d\n", numeroJogador);
+        divisor();
+
+        // Lógica de Verificação
+        switch (tipo) {
+            case 'M': resultado = (numeroJogador > numeroComputador); break;
+            case 'N': resultado = (numeroJogador < numeroComputador); break;
+            case 'I': resultado = (numeroJogador == numeroComputador); break;
+            default:  resultado = -1; break;
+        }
+
+        if (resultado == 1) {
+            printf(" >>> PARABENS! VOCE VENCEU! <<<\n");
+            vitorias++;
+        } else if (resultado == 0) {
+            printf(" >>> QUE PENA! VOCE PERDEU. <<<\n");
+        } else {
+            printf(" Opcao invalida! Partida anulada.\n");
+            partidas--;
+        }
+
+        divisor();
+        printf("\n Deseja jogar novamente? (S/N): ");
+        scanf(" %c", &continuar);
+
+    } while (toupper(continuar) == 'S');
+
+    limparTela();
+    divisor();
+    printf("        RESUMO DO CAMPEONATO\n");
+    divisor();
+    printf(" Total de Partidas: %d\n", partidas);
+    printf(" Vitorias:          %d\n", vitorias);
+    printf(" Aproveitamento:    %.1f%%\n", (partidas > 0) ? ((float)vitorias/partidas)*100 : 0);
+    divisor();
+    printf(" Obrigado por jogar! Ate logo.\n\n");
+
+    return 0;
 }
