@@ -1,0 +1,71 @@
+#include <stdio.h>
+
+/* Tema 5 - Jogo de Batalha Naval
+ * Desafio: nível novato
+ * Posicionando Navios no Tabuleiro
+ */
+
+int main()
+{
+    // Declaração da matriz bidimensional para representação do tabuleiro 10x10
+    int tabuleiro[10][10];
+
+    /* Inicialização da Matriz:
+     * Utiliza-se loops aninhados (for) para iterar sobre cada célula do tabuleiro,
+     * atribuindo o valor 0 (zero) para representar o estado "água".*/
+
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            tabuleiro[i][j] = 0;
+        }
+    }
+    /* Posicionamento Estratégico dos Navios:
+     * As coordenadas são definidas por indexação direta na matriz.
+     * O valor 3 é utilizado para marcar células ocupadas por embarcações.*/
+
+    // Navio Horizontal: Itera sobre o índice das colunas mantendo a linha constante
+    int navioHorizontalX = 2, navioHorizontalY = 3;
+    for (int j = 0; j < 3; j++)
+    {
+        tabuleiro[navioHorizontalX][navioHorizontalY + j] = 3;
+    }
+
+    // Navio Vertical: Itera sobre o índice das linhas mantendo a coluna constante
+    int navioVerticalX = 5, navioVerticalY = 7;
+    for (int i = 0; i < 3; i++)
+    {
+        tabuleiro[navioVerticalX + i][navioVerticalY] = 3;
+    }
+
+    /* Renderização do Tabuleiro no Console:
+     * Implementação de interface textual com sistema de coordenadas (A-J, 1-10).*/
+
+    printf("--- JOGO BATALHA NAVAL ---\n\n");
+
+    // Impressão do cabeçalho de coordenadas alfabéticas (Eixo Y)
+    printf("   A B C D E F G H I J\n");
+
+    /* Loop principal de exibição:
+     * O modificador de formato "%2d" é empregado para garantir o alinhamento
+     * vertical das linhas, tratando a diferença de largura entre 1 e 10.*/
+
+    for (int i = 0; i < 10; i++)
+    {
+        // Exibição do índice numérico lateral (Eixo X)
+        printf("%2d ", i + 1);
+
+        for (int j = 0; j < 10; j++)
+        {
+            // Exibição dos estados das células (0: Água, 3: Navio)
+            printf("%d ", tabuleiro[i][j]);
+        }
+        // Quebra de linha para correta estruturação da grade (Grid)
+        printf("\n");
+    }
+
+    printf("\n");
+
+    return 0;
+}
